@@ -24,7 +24,7 @@
 
                         <dropdown-with-all data-cy="area-dropdown" class="center-block" :dropdown-list=areaList includes-all default-input='All' @selection-changed='areaChange'>Area:</dropdown-with-all> 
 
-                        <dropdown-with-all data-cy="area-dropdown" class="center-block" :dropdown-list=areaList includes-all default-input='All' @selection-changed='areaChange'>Task:</dropdown-with-all> 
+                        <dropdown-with-all data-cy="area-dropdown" class="center-block" :dropdown-list=taskList includes-all default-input='All' @selection-changed='areaChange'>Task:</dropdown-with-all> 
 
                     </div>
                 </fieldset>
@@ -417,6 +417,31 @@
                 /**
                  * returns a sorted array of all the types of seeding in the current logs. If the area or crop does not equal 'All' then the array will only contain types of seeding that have the selected area and/or crop
                  */ 
+                taskList(){
+                    let seedFilter = []
+                    if(this.selectedSeeding != 'All'){
+                        seedFilter = this.seedingLogs.filter((x) => x.log_category[0].name === this.selectedSeeding)
+                    }
+                    else{
+                        seedFilter = this.seedingLogs.filter((x) => x)
+                    }
+                    let areaArray = []
+                    if(this.selectedCrop != 'All'){
+                        let cropFilter = seedFilter.filter((x) => this.idToCropMap.get(x.data.crop_tid) === this.selectedCrop)
+                         areaArray = cropFilter.map(h =>
+                            h.movement.area[0].name
+                        )
+                    }
+                    else{
+                        areaArray = seedFilter.map(h =>
+                            h.movement.area[0].name
+                        )
+                    }
+                    let areas = new Set(areaArray)
+                    let newAreaArray = Array.from(areas)
+                    return newAreaArray.sort()
+                },
+
                 seedingTypeList(){
                     let areaFilter = []
                     if(this.selectedArea != 'All'){
