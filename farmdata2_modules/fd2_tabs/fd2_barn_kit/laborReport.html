@@ -103,8 +103,8 @@
                 selectedArea: 'All',
                 selectedSeeding: 'All',
 
-                headers: ['date', 'crop', 'area', 'Tray/Direct', 'Row/Bed', 'Row Feet', 'Bed Feet', 'Tray Seeds', '# of Trays', 'Cells Per Tray', 'Task','Hours', 'Num Workers','Varieties', 'Comments','User'],
-                visibleColumns: [true, true, true, true, false, false, false, false, false, false, true, true, true, true, true, true],
+                headers: ['date', 'crop', 'area', 'Tray/Direct', 'Row/Bed', 'Row Feet', 'Bed Feet', 'Tray Seeds', '# of Trays', 'Cells Per Tray','Hours', 'Num Workers','Varieties', 'Comments','User'],
+                visibleColumns: [true, true, true, true, false, false, false, false, false, false, true, true, true, true, true,],
 
                 idToCropMap: new Map(),
                 cropToIDMap: new Map(),
@@ -148,13 +148,13 @@
                 seedingChange(selectedSeeding){
                     this.selectedSeeding = selectedSeeding
                     if(selectedSeeding == 'All'){
-                        this.visibleColumns = [true, true, true, true, false, false, false, false, false, false, true, true, true, true, true, true]
+                        this.visibleColumns = [true, true, true, true, false, false, false, false, false, false, true, true, true, true, true]
                     }
                     else if(selectedSeeding == 'Direct Seedings'){
-                        this.visibleColumns = [true, true, true, true, true, true, true, false, false, false, true, true, true, true, true, true]
+                        this.visibleColumns = [true, true, true, true, true, true, true, false, false, false, true, true, true, true, true]
                     }
                     else if(selectedSeeding == 'Tray Seedings'){
-                        this.visibleColumns = [true, true, true, true,false, false, false, true, true, true, true, true, true, true, true, true]
+                        this.visibleColumns = [true, true, true, true,false, false, false, true, true, true, true, true, true, true, true]
                     }
                 },
                 /**
@@ -414,9 +414,11 @@
                     let newAreaArray = Array.from(areas)
                     return newAreaArray.sort()
                 },
+                
                 /**
-                 * returns a sorted array of all the types of seeding in the current logs. If the area or crop does not equal 'All' then the array will only contain types of seeding that have the selected area and/or crop
+                 * returns a sorted array of all the types of tasks in the current logs. If the area or crop does not equal 'All' then the array will only contain types of tasks that have the selected area and/or crop
                  */ 
+
                 taskList(){
                     let seedFilter = []
                     if(this.selectedSeeding != 'All'){
@@ -441,6 +443,10 @@
                     let newAreaArray = Array.from(areas)
                     return newAreaArray.sort()
                 },
+
+                /**
+                 * returns a sorted array of all the types of seeding in the current logs. If the area or crop does not equal 'All' then the array will only contain types of seeding that have the selected area and/or crop
+                 */ 
 
                 seedingTypeList(){
                     let areaFilter = []
